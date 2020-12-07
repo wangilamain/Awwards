@@ -28,7 +28,7 @@ SECRET_KEY = '@zy&(z5k6!iiz+is%d&j--pr$&tnuw^#5tq%t*coqbzkvw(k(&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS')
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -40,12 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'website',
+    'project',
     'crispy_forms',
     'fontawesome_5',
     'bootstrap4',
     'cloudinary',
     'rest_framework',
+    
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -66,7 +67,9 @@ ROOT_URLCONF = 'awwards.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'awwards/project/templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -148,11 +151,5 @@ cloudinary.config(
 
 LOGOUT_REDIRECT_URL = "login"
 LOGIN_REDIRECT_URL="welcome"
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ],
-    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning'
-}
 
 django_heroku.settings(locals())
